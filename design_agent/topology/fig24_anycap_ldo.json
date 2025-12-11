@@ -1,0 +1,315 @@
+{
+    "figure_id": "Any-Cap_Fig24_Initial_LDO",
+    "source": "Any-Cap Low Dropout Voltage Regulator.pdf",
+    "page": 47,
+    "description": "Initial LDO with Device Sizing - 3-stage amplifier with bias circuit",
+    "topology": {
+        "supply_voltage": "VIN",
+        "ground": "GND",
+        "bias_circuit": {
+            "description": "Current mirror bias generation",
+            "devices": [
+                {
+                    "name": "M15",
+                    "type": "pmos",
+                    "size": "40/6",
+                    "d": "n_bias",
+                    "g": "n_bias",
+                    "s": "VIN",
+                    "b": "VIN"
+                },
+                {
+                    "name": "M16",
+                    "type": "pmos",
+                    "size": "20/6",
+                    "d": "n1",
+                    "g": "n_bias",
+                    "s": "VIN",
+                    "b": "VIN"
+                },
+                {
+                    "name": "M17",
+                    "type": "pmos",
+                    "size": "20/6",
+                    "d": "n2",
+                    "g": "n_bias",
+                    "s": "VIN",
+                    "b": "VIN"
+                },
+                {
+                    "name": "M18",
+                    "type": "nmos",
+                    "size": "20/10",
+                    "d": "n_bias",
+                    "g": "n_bias",
+                    "s": "GND",
+                    "b": "GND"
+                },
+                {
+                    "name": "M19",
+                    "type": "nmos",
+                    "size": "4/12",
+                    "d": "n1",
+                    "g": "FB",
+                    "s": "GND",
+                    "b": "GND"
+                },
+                {
+                    "name": "M20",
+                    "type": "nmos",
+                    "size": "25/2",
+                    "d": "n2",
+                    "g": "n2",
+                    "s": "GND",
+                    "b": "GND"
+                },
+                {
+                    "name": "I3uA",
+                    "type": "isource",
+                    "value": "3u",
+                    "pos": "VIN",
+                    "neg": "n_bias"
+                }
+            ]
+        },
+        "error_amplifier": {
+            "description": "Folded-cascode OTA",
+            "devices": [
+                {
+                    "name": "M1",
+                    "type": "nmos",
+                    "size": "100/2",
+                    "d": "n3",
+                    "g": "VREF",
+                    "s": "n5",
+                    "b": "GND",
+                    "comment": "Input pair"
+                },
+                {
+                    "name": "M2",
+                    "type": "nmos",
+                    "size": "100/2",
+                    "d": "n4",
+                    "g": "VFB",
+                    "s": "n5",
+                    "b": "GND",
+                    "comment": "Input pair"
+                },
+                {
+                    "name": "M3",
+                    "type": "pmos",
+                    "size": "40/10",
+                    "d": "n3",
+                    "g": "n1",
+                    "s": "VIN",
+                    "b": "VIN",
+                    "comment": "Cascode load"
+                },
+                {
+                    "name": "M4",
+                    "type": "pmos",
+                    "size": "40/10",
+                    "d": "n4",
+                    "g": "n1",
+                    "s": "VIN",
+                    "b": "VIN",
+                    "comment": "Cascode load"
+                },
+                {
+                    "name": "M5",
+                    "type": "nmos",
+                    "size": "40/10",
+                    "d": "n3",
+                    "g": "n2",
+                    "s": "n6",
+                    "b": "GND",
+                    "comment": "Folded node"
+                },
+                {
+                    "name": "M6",
+                    "type": "nmos",
+                    "size": "40/10",
+                    "d": "n4",
+                    "g": "n2",
+                    "s": "n7",
+                    "b": "GND",
+                    "comment": "Folded node"
+                },
+                {
+                    "name": "M7",
+                    "type": "nmos",
+                    "size": "10/5",
+                    "d": "n6",
+                    "g": "n6",
+                    "s": "GND",
+                    "b": "GND",
+                    "comment": "Current mirror"
+                },
+                {
+                    "name": "M8",
+                    "type": "nmos",
+                    "size": "50/2",
+                    "d": "n7",
+                    "g": "n6",
+                    "s": "GND",
+                    "b": "GND",
+                    "comment": "Current mirror"
+                },
+                {
+                    "name": "M9",
+                    "type": "nmos",
+                    "size": "100/5",
+                    "d": "n5",
+                    "g": "n2",
+                    "s": "GND",
+                    "b": "GND",
+                    "comment": "Tail current"
+                },
+                {
+                    "name": "M10",
+                    "type": "nmos",
+                    "size": "10/6",
+                    "d": "n1",
+                    "g": "n1",
+                    "s": "GND",
+                    "b": "GND"
+                }
+            ],
+            "output_node": "n4"
+        },
+        "buffer": {
+            "description": "Source follower buffer stage",
+            "devices": [
+                {
+                    "name": "M11",
+                    "type": "pmos",
+                    "size": "250/2",
+                    "d": "n8",
+                    "g": "n4",
+                    "s": "VIN",
+                    "b": "VIN",
+                    "comment": "Source follower"
+                },
+                {
+                    "name": "M12",
+                    "type": "nmos",
+                    "size": "100/2",
+                    "d": "n8",
+                    "g": "n8",
+                    "s": "n9",
+                    "b": "GND"
+                },
+                {
+                    "name": "M13",
+                    "type": "nmos",
+                    "size": "100/2",
+                    "d": "n9",
+                    "g": "n9",
+                    "s": "GND",
+                    "b": "GND"
+                },
+                {
+                    "name": "M14",
+                    "type": "pmos",
+                    "size": "300/2",
+                    "d": "VCTRL",
+                    "g": "n8",
+                    "s": "VIN",
+                    "b": "VIN",
+                    "comment": "Buffer output"
+                }
+            ],
+            "output_node": "VCTRL"
+        },
+        "pass_device": {
+            "description": "Power transistor",
+            "devices": [
+                {
+                    "name": "MPASS",
+                    "type": "pmos",
+                    "size": "850000/2",
+                    "d": "VOUT",
+                    "g": "VCTRL",
+                    "s": "VIN",
+                    "b": "VIN",
+                    "comment": "8.5mm/2um"
+                }
+            ]
+        },
+        "feedback_network": {
+            "devices": [
+                {
+                    "name": "R1",
+                    "type": "resistor",
+                    "value": "50k",
+                    "pos": "VOUT",
+                    "neg": "VFB"
+                },
+                {
+                    "name": "R2",
+                    "type": "resistor",
+                    "value": "7.3k",
+                    "pos": "VFB",
+                    "neg": "GND"
+                },
+                {
+                    "name": "R3",
+                    "type": "resistor",
+                    "value": "50k",
+                    "pos": "VOUT",
+                    "neg": "n10"
+                },
+                {
+                    "name": "R4",
+                    "type": "resistor",
+                    "value": "50k",
+                    "pos": "n10",
+                    "neg": "GND"
+                }
+            ]
+        },
+        "load": {
+            "devices": [
+                {
+                    "name": "CLOAD",
+                    "type": "capacitor",
+                    "value": "1u",
+                    "pos": "VOUT",
+                    "neg": "GND"
+                },
+                {
+                    "name": "RLOAD",
+                    "type": "resistor",
+                    "value": "variable",
+                    "pos": "VOUT",
+                    "neg": "GND"
+                }
+            ]
+        }
+    },
+    "key_nodes": [
+        "VIN",
+        "VOUT",
+        "GND",
+        "VREF",
+        "VFB",
+        "VCTRL",
+        "n_bias",
+        "n1",
+        "n2",
+        "n3",
+        "n4",
+        "n5",
+        "n6",
+        "n7",
+        "n8",
+        "n9",
+        "n10"
+    ],
+    "design_parameters": {
+        "vref": "0.6V",
+        "vout_target": "1.2V",
+        "iload_max": "100mA",
+        "cload": "1uF"
+    }
+}

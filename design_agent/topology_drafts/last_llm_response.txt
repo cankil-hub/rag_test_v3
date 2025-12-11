@@ -1,0 +1,36 @@
+```json
+{
+  "circuit_type": "small_signal",
+  "devices": [
+    {
+      "name": "gm_ea",
+      "type": "vccs",
+      "value": "gm_ea",
+      "connections": {
+        "control_pos": "FB",
+        "control_neg": "gnd",
+        "out_pos": "n_ea_out",
+        "out_neg": "gnd"
+      },
+      "comment": "Overall transconductance of the Error Amplifier (from M1/M2 differential pair)"
+    },
+    {
+      "name": "ro_ea",
+      "type": "resistor",
+      "value": "ro_ea",
+      "connections": {
+        "pos": "n_ea_out",
+        "neg": "gnd"
+      },
+      "comment": "Output resistance of the Error Amplifier at n_ea_out (effective resistance of M8 || M17 branches)"
+    },
+    {
+      "name": "gm_M11",
+      "type": "vccs",
+      "value": "gm_M11",
+      "connections": {
+        "control_pos": "n_ea_out",
+        "control_neg": "gnd",
+        "out_pos": "n_buffer_out",
+        "out_neg": "gnd"
+      

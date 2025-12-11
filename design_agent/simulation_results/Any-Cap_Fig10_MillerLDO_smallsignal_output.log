@@ -1,0 +1,11 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: Block Diagram of Miller-Compensated LDO Regulator (Small-Signal Model)
+
+Error on line:
+  a$poly$ggm_ea %vd [ fb 0 ] %id ( n_ea_out 0 ) a$poly$ggm_ea
+MIF-ERROR - model: a$poly$ggm_ea - Bad real value
+    Simulation interrupted due to error!
+

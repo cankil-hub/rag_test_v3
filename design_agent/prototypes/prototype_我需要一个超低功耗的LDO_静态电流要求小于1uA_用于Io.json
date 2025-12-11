@@ -1,0 +1,118 @@
+{
+  "figure_id": "prototype_超低功耗LDO",
+  "description": "该小信号等效电路表示采用Vadim Ivanov方法设计的超低功耗、任意负载稳定LDO。它包含一个误差放大器(EA)，一个PMOS调整管，以及一个电阻反馈网络。EA被建模为一个跨导放大器(VCCS)和输出电阻，驱动调整管的栅极。调整管被建模为一个VCCS和其自身输出电阻。电路包含内部补偿电容Cc，调整管栅极的寄生电容C_gb，以及输出负载电容CL和负载电阻RL。该架构旨在实现任意负载下的稳定性（包括无外部电容或仅片上电容）和快速瞬态响应。",
+  "circuit_type": "small_signal",
+  "devices": [
+    {
+      "name": "gm_ea",
+      "type": "vccs",
+      "value": "5uS",
+      "connections": {
+        "control_pos": "vref",
+        "control_neg": "vfb",
+        "out_pos": "gate_pass",
+        "out_neg": "gnd"
+      },
+      "comment": "误差放大器(EA)的跨导，控制调整管栅极电压"
+    },
+    {
+      "name": "ro_ea",
+      "type": "resistor",
+      "value": "10MΩ",
+      "connections": {
+        "pos": "gate_pass",
+        "neg": "gnd"
+      },
+      "comment": "误差放大器(EA)的输出电阻"
+    },
+    {
+      "name": "C_gb",
+      "type": "capacitor",
+      "value": "1pF",
+      "connections": {
+        "pos": "gate_pass",
+        "neg": "gnd"
+      },
+      "comment": "调整管栅极的寄生电容"
+    },
+    {
+      "name": "gm_pass",
+      "type": "vccs",
+      "value": "100mS",
+      "connections": {
+        "control_pos": "vin",
+        "control_neg": "gate_pass",
+        "out_pos": "vout",
+        "out_neg": "gnd"
+      },
+      "comment": "PMOS调整管的跨导，其电流 (gm_pass * (v_in - v_gate_pass)) 流向输出节点 vout"
+    },
+    {
+      "name": "ro_pass",
+      "type": "resistor",
+      "value": "100kΩ",
+      "connections": {
+        "pos": "vout",
+        "neg": "vin"
+      },
+      "comment": "PMOS调整管的输出电阻 (漏源电阻)"
+    },
+    {
+      "name": "Cc",
+      "type": "capacitor",
+      "value": "1pF",
+      "connections": {
+        "pos": "gate_pass",
+        "neg": "vout"
+      },
+      "comment": "内部补偿电容，可能为米勒补偿或代表其他内部频率补偿效果"
+    },
+    {
+      "name": "CL",
+      "type": "capacitor",
+      "value": "1nF",
+      "connections": {
+        "pos": "vout",
+        "neg": "gnd"
+      },
+      "comment": "片上负载电容 (典型值，范围100pF到几nF)"
+    },
+    {
+      "name": "RL",
+      "type": "resistor",
+      "value": "1MΩ",
+      "connections": {
+        "pos": "vout",
+        "neg": "gnd"
+      },
+      "comment": "负载电阻，表示轻负载条件下的等效阻抗"
+    },
+    {
+      "name": "Rfb1",
+      "type": "resistor",
+      "value": "5MΩ",
+      "connections": {
+        "pos": "vout",
+        "neg": "vfb"
+      },
+      "comment": "反馈分压电阻1"
+    },
+    {
+      "name": "Rfb2",
+      "type": "resistor",
+      "value": "5MΩ",
+      "connections": {
+        "pos": "vfb",
+        "neg": "gnd"
+      },
+      "comment": "反馈分压电阻2"
+    }
+  ],
+  "parameters": {
+    "gm_ea": "5 uS",
+    "gm_pass": "100 mS",
+    "ro_ea": "10 MΩ",
+    "Cc": "1 pF",
+    "CL": "1 nF"
+  }
+}

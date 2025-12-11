@@ -1,0 +1,20 @@
+```json
+{
+  "architecture_name": "Enhanced Dual-Loop LDO (基于Doc 2, Fig 10)",
+  "source_paper": "eetop.cn_[Vadim_Ivanov]_Methodology_for_Any-Load_Stable LDOs(翻译结果).pdf",
+  
+  "architectures_in_papers": [
+    {
+      "name": "Classical CMOS LDO",
+      "brief": "由误差放大器、电压缓冲器和功率调整管组成的标准LDO结构，通过负反馈调节输出电压。广泛应用但可能在极端低静态电流和高速瞬态响应之间存在权衡。"
+    },
+    {
+      "name": "Voltage Follower LDO",
+      "brief": "一种简化的LDO结构，用作电压跟随器，实现无条件稳定和极低静态电流（200-300 nA），但通常速度和精度较低，不适用于高动态负载。"
+    },
+    {
+      "name": "Dual-Loop LDO (Doc 2, Fig 7)",
+      "brief": "采用双环路设计，旨在实现快速的负载瞬态响应。在负载从高到低切换时响应快（3-5 ns），但如果静态电流I4很小，则在负载从低到高切换时反应延迟可能过大。"
+    },
+    {
+      "name": "Enhanced Dual-Loop LDO for Digital Units (Doc 2, Fig

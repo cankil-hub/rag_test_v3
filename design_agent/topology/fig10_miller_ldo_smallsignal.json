@@ -1,0 +1,145 @@
+{
+    "figure_id": "Any-Cap_Fig10_MillerLDO",
+    "source": "Any-Cap Low Dropout Voltage Regulator.pdf",
+    "page": 27,
+    "description": "Block Diagram of Miller-Compensated LDO Regulator (Small-Signal Model)",
+    "circuit_type": "small_signal",
+    "devices": [
+        {
+            "name": "gm_ea",
+            "type": "vccs",
+            "value": "gm_ea",
+            "connections": {
+                "control_pos": "fb",
+                "control_neg": "gnd",
+                "out_pos": "n_ea_out",
+                "out_neg": "gnd"
+            },
+            "comment": "Overall transconductance of the Error Amplifier"
+        },
+        {
+            "name": "ro_ea",
+            "type": "resistor",
+            "value": "ro_ea",
+            "connections": {
+                "pos": "n_ea_out",
+                "neg": "gnd"
+            },
+            "comment": "Output resistance of the Error Amplifier"
+        },
+        {
+            "name": "gm_buffer",
+            "type": "vccs",
+            "value": "gm_buffer",
+            "connections": {
+                "control_pos": "n_ea_out",
+                "control_neg": "gnd",
+                "out_pos": "n_buffer_out",
+                "out_neg": "gnd"
+            },
+            "comment": "Buffer stage transconductance"
+        },
+        {
+            "name": "ro_buffer",
+            "type": "resistor",
+            "value": "ro_buffer",
+            "connections": {
+                "pos": "n_buffer_out",
+                "neg": "gnd"
+            },
+            "comment": "Buffer output resistance"
+        },
+        {
+            "name": "Cp",
+            "type": "capacitor",
+            "value": "Cp",
+            "connections": {
+                "pos": "n_buffer_out",
+                "neg": "gnd"
+            },
+            "comment": "Pass device gate capacitance"
+        },
+        {
+            "name": "gm_pass",
+            "type": "vccs",
+            "value": "gm_pass",
+            "connections": {
+                "control_pos": "n_buffer_out",
+                "control_neg": "gnd",
+                "out_pos": "vout",
+                "out_neg": "gnd"
+            },
+            "comment": "Pass device transconductance"
+        },
+        {
+            "name": "ro_pass",
+            "type": "resistor",
+            "value": "ro_pass",
+            "connections": {
+                "pos": "vout",
+                "neg": "gnd"
+            },
+            "comment": "Pass device output resistance"
+        },
+        {
+            "name": "CL",
+            "type": "capacitor",
+            "value": "CL",
+            "connections": {
+                "pos": "vout",
+                "neg": "gnd"
+            },
+            "comment": "Load capacitance"
+        },
+        {
+            "name": "Cc",
+            "type": "capacitor",
+            "value": "Cc",
+            "connections": {
+                "pos": "n_ea_out",
+                "neg": "vout"
+            },
+            "comment": "Miller compensation capacitor"
+        },
+        {
+            "name": "R1",
+            "type": "resistor",
+            "value": "R1",
+            "connections": {
+                "pos": "vout",
+                "neg": "fb"
+            },
+            "comment": "Feedback resistor (upper)"
+        },
+        {
+            "name": "R2",
+            "type": "resistor",
+            "value": "R2",
+            "connections": {
+                "pos": "fb",
+                "neg": "gnd"
+            },
+            "comment": "Feedback resistor (lower)"
+        }
+    ],
+    "nets": [
+        "vout",
+        "fb",
+        "gnd",
+        "n_ea_out",
+        "n_buffer_out"
+    ],
+    "parameters": {
+        "gm_ea": "100u",
+        "ro_ea": "1Meg",
+        "gm_buffer": "500u",
+        "ro_buffer": "500k",
+        "gm_pass": "10m",
+        "ro_pass": "100k",
+        "Cp": "5p",
+        "Cc": "5p",
+        "CL": "1u",
+        "R1": "50k",
+        "R2": "50k"
+    }
+}

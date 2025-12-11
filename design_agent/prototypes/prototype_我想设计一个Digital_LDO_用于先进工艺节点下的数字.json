@@ -1,0 +1,54 @@
+{
+  "figure_id": "prototype_Digital_LDO_Small_Signal",
+  "description": "该小信号等效电路为Coarse-Fine Dual-Loop Digital LDO (CFL-DLDO) 的简化模型。由于LDO为纯数字实现，传统模拟误差放大器跨导(gm_ea)和调整管跨导(gm_pass)等参数不适用。本模型通过一个**有效跨导(gm_eff_loop)**来表示整个数字控制环路（包括数字误差检测、数字控制器和数字调整管阵列）对输出电压的综合调节作用。数字调整管阵列的输出阻抗由**ro_dcp**表示。输出端连接负载电容CL和负载电阻RL。",
+  "circuit_type": "small_signal",
+  "devices": [
+    {
+      "name": "gm_eff_loop",
+      "type": "vccs",
+      "value": "100mS",
+      "connections": {
+        "control_pos": "vref",
+        "control_neg": "vout",
+        "out_pos": "vout",
+        "out_neg": "gnd"
+      },
+      "comment": "有效跨导，代表整个数字控制环路（数字误差检测、控制器、数字调整管阵列）的综合调节能力。鉴于LDO为纯数字，传统gm_ea和gm_pass不适用，此为等效模型中的关键参数，反映其瞬态响应能力。100mS代表强有力的调节作用，以实现快速瞬态响应。"
+    },
+    {
+      "name": "ro_dcp",
+      "type": "resistor",
+      "value": "100 Ohm",
+      "connections": {
+        "pos": "vout",
+        "neg": "gnd"
+      },
+      "comment": "数字控制功率级（调整管阵列）的等效输出阻抗。代表了LDO在开环状态下或高频下调整管阵列的固有输出阻抗。此值是基于先进工艺节点下数字功率级的合理估计。"
+    },
+    {
+      "name": "CL",
+      "type": "capacitor",
+      "value": "0.6 nF",
+      "connections": {
+        "pos": "vout",
+        "neg": "gnd"
+      },
+      "comment": "片上负载电容，参考Doc 3中OCL-LDO的典型值。CFL-DLDO作为片上解决方案，通常支持小容量片上电容。"
+    },
+    {
+      "name": "RL",
+      "type": "resistor",
+      "value": "5 Ohm",
+      "connections": {
+        "pos": "vout",
+        "neg": "gnd"
+      },
+      "comment": "等效负载电阻，基于Doc 5中CFL-DLDO的200mA最大负载电流容量和典型1V输出电压估算 (Vout/Iload = 1V/200mA)。此值代表了LDO在满载工作条件下的等效负载。"
+    }
+  ],
+  "parameters": {
+    "Vref_node": "vref",
+    "Vout_node": "vout",
+    "GND_node": "gnd"
+  }
+}

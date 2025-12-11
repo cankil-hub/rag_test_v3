@@ -1,0 +1,426 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: Any-Cap Initial LDO - Figure 24
+
+Warning: Model issue on line 4 :
+  .model nmos_3v3 nmos level=1 vto=0.7 gamma=0.45 phi=0.9 nsub=9e14 nsd=2e ...
+unrecognized parameter (nsd) - ignored
+unrecognized parameter (lamda) - ignored
+
+Warning: Model issue on line 12 :
+  .model pmos_3v3 pmos level=1 vto=-0.8 gamma=0.4 phi=0.8 nsub=5e14 nsd=2e ...
+unrecognized parameter (nsd) - ignored
+unrecognized parameter (lamda) - ignored
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Warning: singular matrix:  check node fb
+
+Warning: singular matrix:  check node fb
+
+Note: Starting dynamic gmin stepping
+Warning: singular matrix:  check node fb
+
+Warning: Dynamic gmin stepping failed
+Note: Starting true gmin stepping
+Warning: singular matrix:  check node fb
+
+Warning: singular matrix:  check node fb
+
+Warning: singular matrix:  check node fb
+
+Warning: True gmin stepping failed
+Note: Starting source stepping
+Warning: source stepping failed
+Note: Transient op started
+Note: Transient op finished successfully
+
+No. of Data Rows : 101
+
+No. of Data Rows : 1
+v(vout) = 1.205740e-07
+v(vfb) = 1.536109e-08
+v(vctrl) = 3.300000e+00
+
+Warning: command 'plot' is not available during batch simulation, ignored!
+    You may use Gnuplot instead.
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Error: no data saved for D.C. Transfer curve analysis; analysis not run
+
+No. of Data Rows : 1
+doAnalyses: not found
+
+run simulation(s) aborted
+	Node                                  Voltage
+	----                                  -------
+	----	-------
+	n10                              6.028702e-08
+	vout                             1.205740e-07
+	vctrl                            3.300000e+00
+	n9                               -1.51266e-51
+	n8                               6.599963e-01
+	n7                               2.044658e-01
+	n6                               2.044658e-01
+	vfb                              1.536109e-08
+	n4                               3.300000e+00
+	n5                              -1.00999e-288
+	n3                               3.300000e+00
+	fb                               0.000000e+00
+	n2                               9.505363e-01
+	n1                               1.384771e+00
+	n_bias                           1.593624e+00
+	vref                             6.000000e-01
+	vin                              3.300000e+00
+
+	Source	Current
+	------	-------
+
+	vin#branch                       -2.53883e-04
+	vref#branch                      0.000000e+00
+
+ Capacitor models (Fixed capacitor)
+      model                     C
+
+        cap                     0
+         cj                     0
+       cjsw                     0
+       defw                 1e-05
+       defl                     0
+     narrow                     0
+      short                     0
+        del                     0
+        tc1                     0
+        tc2                     0
+         di                     0
+      thick                     0
+     bv_max                 1e+99
+
+ Mos1 models (Level 1 MOSfet model with Meyer capacitance model)
+      model              nmos_3v3              pmos_3v3
+
+       type                  nmos                  pmos
+        vto                   0.7                  -0.8
+         kp           0.000161147           4.60419e-05
+      gamma                  0.45                   0.4
+        phi                   0.9                   0.8
+     lambda                     0                     0
+         rd                    10                    20
+         rs                    10                    20
+        cbd                     0                     0
+        cbs                     0                     0
+         is                 1e-14                 1e-14
+         pb                   0.8                   0.8
+       cgso                 4e-10                 4e-10
+       cgdo                 4e-10                 4e-10
+       cgbo                 1e-10                 1e-10
+        rsh                     0                     0
+         cj               0.00056               0.00094
+         mj                  0.45                   0.5
+       cjsw               0.00035               0.00032
+       mjsw                   0.2                   0.3
+         js                     0                     0
+        tox               7.5e-09               7.5e-09
+         ld                     0                     0
+         u0                   350                   100
+         fc                   0.5                   0.5
+       nsub                 9e+14                 5e+14
+        tpg                     1                     1
+        nss                     0                     0
+       tnom                    27                    27
+         kf                     0                     0
+         af                     1                     1
+       nlev                     2                     2
+     gdsnoi                     1                     1
+
+ Resistor models (Simple linear resistor)
+      model                     R
+
+        rsh                     0
+     narrow                     0
+      short                     0
+        tc1                     0
+        tc2                     0
+        tce                     0
+       defw                 1e-05
+          l                 1e-05
+         kf                     0
+         af                     0
+          r                     0
+     bv_max                 1e+99
+         lf                     1
+         wf                     1
+         ef                     1
+
+ Capacitor: Fixed capacitor
+     device                 cload
+      model                     C
+capacitance                 1e-06
+      dtemp                     0
+     bv_max                 1e+99
+          i                     0
+          p                     0
+
+ Isource: Independent current source
+     device                 iload                  i3ua
+         dc                     0                 3e-06
+          m                     1                     1
+      acmag                     0                     0
+      pulse         -         -
+        sin         -         -
+        exp         -         -
+        pwl         -         -
+       sffm         -         -
+         am         -         -
+    trnoise         -         -
+   trrandom         -         -
+          v          -1.20574e-07              -1.70638
+          p                     0           5.11913e-06
+    current                     0                 3e-06
+
+ Mos1: Level 1 MOSfet model with Meyer capacitance model
+     device                   m13                   m12                    m9
+      model              nmos_3v3              nmos_3v3              nmos_3v3
+         id          -1.51266e-63           6.69996e-13         -8.05741e-303
+         is                     0                     0         -8.05741e-303
+         ig                     0                     0                     0
+         ib           1.51266e-63          -6.69996e-13          1.61148e-302
+        vgs          -1.51266e-51              0.659996              0.950536
+        vds          -1.51266e-51              0.659996                     0
+        vbs                     0           1.51266e-51          8.05741e-291
+        von                   0.7                   0.7                   0.7
+      vdsat                     0                     0              0.250536
+         rs                    10                    10                    10
+         rd                    10                    10                    10
+         gm                     0                     0                     0
+        gds                     0                     0           0.000807462
+        gmb                     0                     0                     0
+        cbd                     0                     0                     0
+        cbs                     0                     0                     0
+        cgs                 4e-14           5.99319e-13           1.19105e-12
+        cgd                 4e-14                 4e-14           1.19105e-12
+        cgb           7.16408e-13             4.113e-14                 5e-16
+       cbd0                     0                     0                     0
+     cbdsw0                     0                     0                     0
+       cbs0                     0                     0                     0
+     cbssw0                     0                     0                     0
+
+ Mos1: Level 1 MOSfet model with Meyer capacitance model
+     device                    m8                    m7                    m6
+      model              nmos_3v3              nmos_3v3              nmos_3v3
+         id           2.14466e-13           2.14466e-13           4.35233e-12
+         is                     0                     0          -8.27869e-13
+         ig                     0                     0                     0
+         ib          -2.14466e-13          -2.14466e-13          -3.52447e-12
+        vgs              0.204466              0.204466               0.74607
+        vds              0.204466              0.204466               3.09553
+        vbs                     0                     0             -0.204466
+        von                   0.7                   0.7              0.746014
+      vdsat                     0                     0           5.68693e-05
+         rs                    10                    10                    10
+         rd                    10                    10                    10
+         gm                     0                     0           3.66572e-08
+        gds                     0                     0                     0
+        gmb                     0                     0           7.84812e-09
+        cbd                     0                     0                     0
+        cbs                     0                     0                     0
+        cgs                 2e-14                 4e-15           1.24378e-12
+        cgd                 2e-14                 4e-15               1.6e-14
+        cgb           2.53704e-13           1.27252e-13                 1e-15
+       cbd0                     0                     0                     0
+     cbdsw0                     0                     0                     0
+       cbs0                     0                     0                     0
+     cbssw0                     0                     0                     0
+
+ Mos1: Level 1 MOSfet model with Meyer capacitance model
+     device                    m5                    m2                    m1
+      model              nmos_3v3              nmos_3v3              nmos_3v3
+         id           4.35234e-12              3.31e-12              3.31e-12
+         is          -8.27871e-13                     0                     0
+         ig                     0                     0                     0
+         ib          -3.52447e-12             -3.31e-12             -3.31e-12
+        vgs               0.74607           1.53611e-08                   0.6
+        vds               3.09553                   3.3                   3.3
+        vbs             -0.204466          1.01398e-288          1.01398e-288
+        von              0.746014                   0.7                   0.7
+      vdsat           5.68693e-05                     0                     0
+         rs                    10                    10                    10
+         rd                    10                    10                    10
+         gm           3.66572e-08                     0                     0
+        gds                     0                     0                     0
+        gmb           7.84813e-09                     0                     0
+        cbd                     0                     0                     0
+        cbs                     0                     0                     0
+        cgs           1.24378e-12                 4e-14           5.17472e-13
+        cgd               1.6e-14                 4e-14                 4e-14
+        cgb                 1e-15           7.16408e-13           1.02515e-13
+       cbd0                     0                     0                     0
+     cbdsw0                     0                     0                     0
+       cbs0                     0                     0                     0
+     cbssw0                     0                     0                     0
+
+ Mos1: Level 1 MOSfet model with Meyer capacitance model
+     device                   m10                   m20                   m19
+      model              nmos_3v3              nmos_3v3              nmos_3v3
+         id           6.28266e-05           6.28267e-05           1.39477e-12
+         is          -6.28266e-05          -6.28267e-05                     0
+         ig                     0                     0                     0
+         ib          -1.39501e-12          -9.60776e-13          -1.39477e-12
+        vgs               1.38414              0.949908                     0
+        vds               1.38351               0.94928               1.38477
+        vbs          -0.000628266          -0.000628267                     0
+        von              0.700149              0.700149                   0.7
+      vdsat              0.683993              0.249759                     0
+         rs                    10                    10                    10
+         rd                    10                    10                    10
+         gm           0.000183705           0.000503098                     0
+        gds                     0                     0                     0
+        gmb           4.35544e-05           0.000119279                     0
+        cbd                     0                     0                     0
+        cbs                     0                     0                     0
+        cgs           1.88168e-13           1.63473e-13               1.6e-15
+        cgd                 4e-15                 1e-14               1.6e-15
+        cgb                 6e-16                 2e-16            1.7309e-13
+       cbd0                     0                     0                     0
+     cbdsw0                     0                     0                     0
+       cbs0                     0                     0                     0
+     cbssw0                     0                     0                     0
+
+ Mos1: Level 1 MOSfet model with Meyer capacitance model
+     device                   m18                 mpass                   m14
+      model              nmos_3v3              pmos_3v3              pmos_3v3
+         id            0.00012823              3.31e-12          -1.73943e-11
+         is           -0.00012823           9.15165e-23           1.73943e-11
+         ig                     0                     0                     0
+         ib          -1.60411e-12             -3.31e-12           1.34892e-21
+        vgs               1.59234          -1.17081e-09                  2.64
+        vds               1.59106                   3.3          -1.36881e-09
+        vbs            -0.0012823          -6.59997e-11          -1.98001e-10
+        von              0.700304                  -0.8                  -0.8
+      vdsat              0.892038                    -0                 -1.84
+         rs                    10                    20                    20
+         rd                    10                    20                    20
+         gm           0.000287498                     0           9.45342e-12
+        gds                     0                     0             0.0127076
+        gmb           6.81376e-05                     0           2.11385e-12
+        cbd                     0                     0                     0
+        cbs                     0                     0                     0
+        cgs           6.21892e-13               3.4e-10           1.50126e-12
+        cgd                 8e-15               3.4e-10           1.50126e-12
+        cgb                 1e-15           7.82713e-09                 2e-16
+       cbd0                     0                     0                     0
+     cbdsw0                     0                     0                     0
+       cbs0                     0                     0                     0
+     cbssw0                     0                     0                     0
+
+ Mos1: Level 1 MOSfet model with Meyer capacitance model
+     device                   m11                    m4                    m3
+      model              pmos_3v3              pmos_3v3              pmos_3v3
+         id              2.65e-12           2.08623e-11           2.08623e-11
+         is           9.15165e-23          -2.08623e-11          -2.08623e-11
+         ig                     0                     0                     0
+         ib             -2.65e-12          -1.42186e-19          -1.42185e-19
+        vgs           1.02343e-07               1.91523               1.91523
+        vds                  2.64           1.01574e-07           1.01574e-07
+        vbs          -6.59997e-11          -4.83246e-10          -4.83245e-10
+        von                  -0.8                  -0.8                  -0.8
+      vdsat                    -0              -1.11523              -1.11523
+         rs                    20                    20                    20
+         rd                    20                    20                    20
+         gm                     0           1.87067e-11           1.87067e-11
+        gds                     0           0.000205389           0.000205389
+        gmb                     0           4.18295e-12           4.18294e-12
+        cbd                     0                     0                     0
+        cbs                     0                     0                     0
+        cgs                 1e-13           9.36838e-13           9.36838e-13
+        cgd                 1e-13           9.36838e-13           9.36838e-13
+        cgb            2.3023e-12                 1e-15                 1e-15
+       cbd0                     0                     0                     0
+     cbdsw0                     0                     0                     0
+       cbs0                     0                     0                     0
+     cbssw0                     0                     0                     0
+
+ Mos1: Level 1 MOSfet model with Meyer capacitance model
+     device                   m17                   m16                   m15
+      model              pmos_3v3              pmos_3v3              pmos_3v3
+         id           6.28267e-05           6.28267e-05            0.00012523
+         is          -6.28267e-05          -6.28267e-05           -0.00012523
+         ig                     0                     0                     0
+         ib          -2.35994e-12           -1.9257e-12           -1.7173e-12
+        vgs               1.70512               1.70512               1.70387
+        vds               2.34695               1.91272               1.70137
+        vbs           -0.00125653           -0.00125653           -0.00250459
+        von             -0.800281             -0.800281              -0.80056
+      vdsat             -0.904838             -0.904838             -0.903311
+         rs                    20                    20                    20
+         rd                    20                    20                    20
+         gm           0.000138868           0.000138868           0.000277268
+        gds                     0                     0                     0
+        gmb           3.10275e-05           3.10275e-05           6.19022e-05
+        cbd                     0                     0                     0
+        cbs                     0                     0                     0
+        cgs           3.76335e-13           3.76335e-13           7.52671e-13
+        cgd                 8e-15                 8e-15               1.6e-14
+        cgb                 6e-16                 6e-16                 6e-16
+       cbd0                     0                     0                     0
+     cbdsw0                     0                     0                     0
+       cbs0                     0                     0                     0
+     cbssw0                     0                     0                     0
+
+ Resistor: Simple linear resistor
+     device                    r4                    r3                    r2
+      model                     R                     R                     R
+ resistance                 50000                 50000                  7300
+         ac                 50000                 50000                  7300
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i           1.20574e-12           1.20574e-12           2.10426e-12
+          p           7.26905e-20           7.26905e-20           3.23237e-20
+
+ Resistor: Simple linear resistor
+     device                    r1
+      model                     R
+ resistance                 50000
+         ac                 50000
+      dtemp                     0
+     bv_max                 1e+99
+      noisy                     1
+          i           2.10426e-12
+          p           2.21395e-19
+
+ Vsource: Independent voltage source
+     device                  vref                   vin
+         dc                   0.6                   3.3
+      acmag                     0                     0
+      pulse         -         -
+        sin         -         -
+        exp         -         -
+        pwl         -         -
+       sffm         -         -
+         am         -         -
+    trnoise         -         -
+   trrandom         -         -
+    portnum                     0                     0
+         z0                     0                     0
+        pwr                     0                     0
+       freq                     0                     0
+      phase                     0                     0
+          i                     0          -0.000253883
+          p                     0          -0.000837814
+
+
+Total analysis time (seconds) = 0.0072182
+
+Total elapsed time (seconds) = 0.042 
+
+Total DRAM available = 32553.457 MB.
+DRAM currently available = 16205.633 MB.
+Maximum ngspice program size =   67.469 MB.
+Current ngspice program size =   67.469 MB.
+
