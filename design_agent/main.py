@@ -149,10 +149,17 @@ class LDODesignAgent:
     
     def _save_report(self, md_content: str, user_request: str) -> str:
         """保存Markdown报告到文件"""
+        import re
+        
         # 生成文件名（基于时间戳）
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        # 提取需求关键词作为文件名的一部分
-        brief = user_request[:20].replace(" ", "_").replace("\n", "")
+        
+        # 提取需求关键词作为文件名的一部分，并清理非法字符
+        brief = user_request[:20]
+        # Windows文件名非法字符: < > : " / \ | ? *
+        brief = re.sub(r'[<>:"/\\|?*]', '_', brief)
+        brief = brief.replace(" ", "_").replace("\n", "")
+        
         filename = f"report_{timestamp}_{brief}.md"
         
         report_path = self.report_dir / filename

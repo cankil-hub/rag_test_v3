@@ -345,11 +345,19 @@ class RAGAgentV3Improved:
             if source and page >= 0:
                 # 获取同一页的图片
                 page_figs = self.multimodal_index.get_figures_by_page(os.path.basename(source), page)
+                # 确保page_figs是列表，如果是字典则转换为列表
+                if isinstance(page_figs, dict):
+                    page_figs = list(page_figs.values())
                 all_figures.extend(page_figs)
             
             # 保留原有的 chunk_id 关联逻辑作为备选
             figures = self.multimodal_index.get_related_figures(doc)
             formulas = self.multimodal_index.get_related_formulas(doc)
+            # 确保是列表
+            if isinstance(figures, dict):
+                figures = list(figures.values())
+            if isinstance(formulas, dict):
+                formulas = list(formulas.values())
             all_figures.extend(figures)
             all_formulas.extend(formulas)
         
@@ -359,10 +367,12 @@ class RAGAgentV3Improved:
         
         print(f"[v3] 多模态检索完成: {len(unique_figures)} 个图片, {len(unique_formulas)} 个公式")
         
-        # 6. 限制数量(优先公式,因为通常更重要)
-        formula_paths = [f['image_path'] for f in unique_formulas[:max_images]]
-        remaining = max_images - len(formula_paths)
-        figure_paths = [f['image_path'] for f in unique_figures[:remaining]]
+        # 6. 限制数量 - 改为平衡分配
+        # 优先展示图片（更直观），公式次之
+        figure_paths = [f['image_path'] for f in unique_figures[:max_images]]
+        # 如果还有剩余空间，添加公式
+        remaining = max(0, max_images - len(figure_paths))
+        formula_paths = [f['image_path'] for f in unique_formulas[:remaining]]
         
         # 7. 组装文本上下文
         context_parts = []

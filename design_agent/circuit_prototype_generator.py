@@ -159,7 +159,7 @@ class CircuitPrototypeGenerator:
         context: str, 
         figures: List
     ) -> Optional[Dict]:
-        """LLM分析检索结果，推荐最佳架构（详细版）"""
+        """LLM分析检索结果，推荐最佳架构（简化版避免截断）"""
         
         prompt = f"""你是模拟电路设计领域的资深专家。基于以下从专业论文中检索的内容，为用户需求推荐最合适的LDO架构。
 
@@ -170,62 +170,29 @@ class CircuitPrototypeGenerator:
 {context[:10000]}  
 
 ## 任务
-请进行**详细的架构分析和推荐**，包括：
-
-### 1. 论文中提到的架构梳理
-- 列出论文中提到的所有LDO架构
-- 简要说明每种架构的特点
-
-### 2. 架构选择分析
-针对用户需求，分析各架构的适用性：
-- 哪些架构能满足该需求？
-- 各架构的优缺点对比
-- 为什么最终选择推荐的架构？
-
-### 3. 推荐理由（详细说明）
-- 该架构如何满足用户的核心需求？
-- 该架构的关键技术特点是什么？
-- 论文中是否有具体的性能数据支撑？
-
-### 4. 设计关键点
-- 实现该架构时需要注意什么？
-- 有哪些设计权衡(tradeoff)？
-- 论文中提到的典型参数值
+分析并推荐最合适的LDO架构，重点说明为什么选择该架构。
 
 ## 输出要求
-请输出JSON格式（只输出JSON，不要其他内容）:
+请输出JSON格式（只输出JSON，不要其他文字说明）:
 {{
   "architecture_name": "推荐的架构名称",
   "source_paper": "来源论文名称",
   
-  "architectures_in_papers": [
-    {{"name": "架构1", "brief": "简要特点"}},
-    {{"name": "架构2", "brief": "简要特点"}}
-  ],
-  
-  "selection_analysis": {{
-    "candidates": ["候选架构1", "候选架构2"],
-    "comparison": "各架构对比分析（100-200字）",
-    "why_selected": "为什么选择推荐的架构（100-200字）"
-  }},
-  
-  "rationale": "详细的推荐理由，包括：该架构如何满足需求、关键技术特点、论文中的性能数据等（300-500字）",
+  "rationale": "为什么推荐该架构？如何满足需求？（200-300字）",
   
   "key_parameters": {{
-    "gm_ea": "误差放大器跨导典型值及说明",
-    "gm_pass": "调整管跨导典型值及说明",
+    "gm_ea": "误差放大器跨导典型值",
+    "gm_pass": "调整管跨导典型值",
     "ro_ea": "误差放大器输出阻抗",
     "Cc": "补偿电容",
-    "CL": "支持的负载电容范围",
+    "CL": "支持的负载电容",
     "Iq": "静态电流"
   }},
   
-  "design_considerations": {{
-    "key_techniques": ["关键技术1", "关键技术2"],
-    "tradeoffs": ["权衡1", "权衡2"],
-    "implementation_notes": "实现时需要注意的事项"
-  }}
+  "design_notes": "关键设计要点（100字内）"
 }}
+
+重要：只输出JSON，确保格式完整，所有字段都要填写。
 """
         
         # 调用LLM（带图片如果有的话）
@@ -244,26 +211,10 @@ class CircuitPrototypeGenerator:
         return architecture_info
     
     def _print_architecture_analysis(self, info: Dict):
-        """打印详细的架构分析结果"""
+        """打印架构分析结果（简化版）"""
         print("\n" + "="*60)
         print("📊 架构分析报告")
         print("="*60)
-        
-        # 论文中的架构
-        archs = info.get("architectures_in_papers", [])
-        if archs:
-            print("\n📖 论文中提到的架构:")
-            for arch in archs:
-                print(f"   • {arch.get('name', 'N/A')}: {arch.get('brief', '')}")
-        
-        # 选择分析
-        selection = info.get("selection_analysis", {})
-        if selection:
-            print(f"\n🔍 候选架构: {', '.join(selection.get('candidates', []))}")
-            print(f"\n📋 对比分析:")
-            print(f"   {selection.get('comparison', 'N/A')}")
-            print(f"\n✅ 选择理由:")
-            print(f"   {selection.get('why_selected', 'N/A')}")
         
         # 推荐架构
         print(f"\n🏆 推荐架构: {info.get('architecture_name', 'N/A')}")
@@ -272,21 +223,15 @@ class CircuitPrototypeGenerator:
         # 详细理由
         rationale = info.get("rationale", "")
         if rationale:
-            print(f"\n📝 详细推荐理由:")
-            # 分行打印，每行不超过60字符
+            print(f"\n📝 推荐理由:")
+            # 分行打印
             for i in range(0, len(rationale), 60):
                 print(f"   {rationale[i:i+60]}")
         
-        # 设计考量
-        considerations = info.get("design_considerations", {})
-        if considerations:
-            techniques = considerations.get("key_techniques", [])
-            if techniques:
-                print(f"\n🔧 关键技术: {', '.join(techniques)}")
-            
-            tradeoffs = considerations.get("tradeoffs", [])
-            if tradeoffs:
-                print(f"⚖️  设计权衡: {', '.join(tradeoffs)}")
+        # 设计要点
+        notes = info.get("design_notes", "")
+        if notes:
+            print(f"\n🔧 设计要点: {notes}")
         
         print("\n" + "="*60)
     
@@ -519,12 +464,23 @@ class CircuitPrototypeGenerator:
         except:
             pass
         
-        # 方法3: 查找第一个 { 和最后一个 }
+        # 方法3: 查找第一个 { 和最后一个 }，处理截断
         start = response.find('{')
         end = response.rfind('}')
         if start != -1 and end != -1 and end > start:
+            json_str = response[start:end+1]
+            
+            # 尝试修复JSON截断
+            if json_str.count('{') > json_str.count('}'):
+                missing = json_str.count('{') - json_str.count('}')
+                json_str += '}' * missing
+                print(f"[PrototypeGen] 尝试修复截断JSON: 添加{missing}个}}")
+            if json_str.count('[') > json_str.count(']'):
+                missing = json_str.count('[') - json_str.count(']')
+                json_str += ']' * missing
+                print(f"[PrototypeGen] 尝试修复截断JSON: 添加{missing}个]")
+            
             try:
-                json_str = response[start:end+1]
                 return json.loads(json_str)
             except json.JSONDecodeError as e:
                 print(f"[PrototypeGen] JSON解码错误(方法3): {e}")
